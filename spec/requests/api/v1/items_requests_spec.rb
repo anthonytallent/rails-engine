@@ -119,4 +119,30 @@ headers = {"CONTENT_TYPE" => "application/json"}
     expect(item.unit_price).to_not eq(previous_unit_price)
     expect(item.unit_price).to eq(1000.99)
   end
+
+  it "won't update if it is not a valid merchant id" do
+    id = create(:item).id
+    previous_name = Item.last.name
+    previous_description = Item.last.description
+    previous_unit_price = Item.last.unit_price
+    item_params = {
+                      name: "Jam and Toast",
+                      description: "Tastes like jam and toast",
+                      unit_price: 1000.99,
+                      merchant_id: 8932659
+                  }
+    headers = {"CONTENT_TYPE" => "application/json"}
+
+    patch "/api/v1/items/#{id}", headers: headers, params: JSON.generate({item: item_params})
+    item = Item.find_by(id: id)
+
+    expect(response.status).to eq(400)
+  end
+
+  it "can destroy an item and any invoice where that is the only item on it" do
+    item = create(:item)
+
+
+
+  end
 end
