@@ -16,8 +16,6 @@ class Api::V1::ItemsController < ApplicationController
   def update 
     item = Item.find(params[:id])
     if item.update(item_params)
-    # binding.pry
-    # if Merchant.find(params[:merchant_id])
       render json: ItemSerializer.new(item)
     else
       render json: "", status: 400

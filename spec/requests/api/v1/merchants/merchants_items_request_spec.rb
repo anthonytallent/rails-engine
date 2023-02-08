@@ -12,6 +12,7 @@ RSpec.describe "merchants items API" do
     expect(response).to be_successful
 
     merchants_items_hash = JSON.parse(response.body, symbolize_names: true)
+
     expect(merchants_items_hash).to have_key(:data)
     expect(merchants_items_hash[:data]).to be_a(Array)
 
@@ -38,7 +39,7 @@ RSpec.describe "merchants items API" do
     end
   end
 
-  xit 'sad path: should return 404 if the merchant id is bad' do # how do I test sad path
+  it 'sad path: should return 404 if the merchant id is bad' do # how do I test sad path
     get "/api/v1/merchants/#{547928523925372}/items"
   
     expect(response.status).to eq(404)
