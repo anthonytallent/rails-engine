@@ -298,9 +298,9 @@
         "lines": [
           1,
           1,
-          23,
-          23,
-          23,
+          25,
+          25,
+          25,
           1,
           null,
           null
@@ -310,7 +310,7 @@
         "lines": [
           1,
           1,
-          25,
+          27,
           null,
           null
         ]
@@ -323,6 +323,8 @@
           1,
           1,
           1,
+          null,
+          1,
           1,
           null,
           null,
@@ -332,6 +334,9 @@
       },
       "/Users/anthonytallent/3mod/projects/rails-engine/app/models/item.rb": {
         "lines": [
+          1,
+          1,
+          1,
           1,
           1,
           null,
@@ -361,8 +366,19 @@
         "lines": [
           1,
           1,
+          1,
+          1,
+          1,
+          1,
           null,
           1,
+          null
+        ]
+      },
+      "/Users/anthonytallent/3mod/projects/rails-engine/spec/requests/api/v1/items_merchant_request_spec.rb": {
+        "lines": [
+          null,
+          null,
           null
         ]
       },
@@ -371,10 +387,13 @@
           1,
           null,
           1,
-          7,
-          7,
-          7,
-          7,
+          8,
+          8,
+          null,
+          8,
+          8,
+          null,
+          null,
           1,
           1,
           null,
@@ -511,9 +530,42 @@
           null,
           1,
           1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          1,
           null,
           null,
+          1,
+          1,
           null,
+          0,
+          null,
+          0,
+          0,
+          0,
+          null,
+          0,
+          null,
+          0,
+          0,
+          null,
+          0,
+          0,
+          null,
+          0,
+          0,
+          null,
+          0,
+          0,
           null,
           null
         ]
@@ -609,25 +661,25 @@
           1,
           1,
           null,
-          1,
+          0,
           null,
-          1,
-          1,
-          1,
+          0,
+          0,
+          0,
           null,
-          1,
+          0,
           null,
-          1,
-          1,
+          0,
+          0,
           null,
-          1,
-          1,
+          0,
+          0,
           null,
-          1,
-          1,
+          0,
+          0,
           null,
-          1,
-          1,
+          0,
+          0,
           null,
           null
         ]
@@ -659,6 +711,15 @@
           null,
           null,
           1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          1,
+          1,
           null,
           null,
           null,
@@ -673,6 +734,16 @@
       "/Users/anthonytallent/3mod/projects/rails-engine/app/controllers/application_controller.rb": {
         "lines": [
           1,
+          1,
+          1,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+          0,
+          null,
           null
         ]
       },
@@ -680,6 +751,47 @@
         "lines": [
           1,
           1,
+          1,
+          null
+        ]
+      },
+      "/Users/anthonytallent/3mod/projects/rails-engine/app/models/invoice.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          0,
+          0,
+          0,
+          null,
+          null,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null
+        ]
+      },
+      "/Users/anthonytallent/3mod/projects/rails-engine/app/models/invoice_item.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
           1,
           null
         ]
@@ -724,6 +836,6 @@
         ]
       }
     },
-    "timestamp": 1675823515
+    "timestamp": 1675965889
   }
 }

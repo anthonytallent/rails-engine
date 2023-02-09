@@ -3,8 +3,11 @@ require 'rails_helper'
 RSpec.describe "items API" do
   let!(:merchant1) { create(:merchant) }
   let!(:merchant2) { create(:merchant) }
+  # let!(:customer1) { Customer.create(first_name: "Anthony", last_name: "Tony")}
   let!(:item1) { create(:item, merchant: merchant1) }
   let!(:item2) { create(:item, merchant: merchant1) }
+  # let!(:invoice1) { Invoice.create(customer_id: customer1.id, merchant_id: merchant1.id, status: 1)}
+  # let!(:ii1) { InvoiceItem.create(item_id: item1.id, invoice_id: invoice1.id)}
   it "sends a list of all the items" do
     create_list(:item, 3, merchant: merchant1)
 
@@ -140,9 +143,42 @@ headers = {"CONTENT_TYPE" => "application/json"}
   end
 
   it "can destroy an item and any invoice where that is the only item on it" do
-    item = create(:item)
+    id = create(:item).id
+    item = Item.last
+    invoice = Invoice.last
 
+    expect(item.name).to be_a(String)
+    expect(item.description).to be_a(String)
+    expect(item.unit_price).to be_a(Float)
 
+    delete "/api/v1/items/#{id}"
 
+    expect(item.name).to_not eq(Item.last.name)
+    expect(item.description).to_not eq(Item.last.description)
+    expect(item.unit_price).to_not eq(Item.last.unit_price)
+  end
+
+  it "can return it's merchants info" do
+    get "/api/v1/items/#{item1.id}/merchant"
+
+    expect(response).to be_successful
+
+    merchant_hash = JSON.parse(response.body, symbolize_names: true)
+    expect(merchant_hash).to have_key(:data)
+    expect(merchant_hash[:data]).to be_a(Hash)
+
+    merchant_data = merchant_hash[:data]
+
+    expect(merchant_data).to have_key(:id)
+    expect(merchant_data[:id]).to be_a(String)
+    
+    expect(merchant_data).to have_key(:type)
+    expect(merchant_data[:type]).to be_a(String)
+
+    expect(merchant_data).to have_key(:attributes)
+    expect(merchant_data[:attributes]).to be_a(Hash)
+
+    expect(merchant_data[:attributes]).to have_key(:name)
+    expect(merchant_data[:attributes][:name]).to be_a(String)
   end
 end
