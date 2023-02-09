@@ -10,7 +10,7 @@ class Api::V1::ItemsController < ApplicationController
 
   def create
     new_item = Item.create(item_params)
-    render json: ItemSerializer.new(new_item)
+    render json: ItemSerializer.new(new_item), status: 201
   end
 
   def update 
@@ -23,7 +23,16 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def destroy
-
+    item = Item.find(params[:id])
+    invoice_ids = item.invoice_items.pluck(:invoice_id)
+    invoices = Invoice.find(invoice_ids)
+    if invoices.any?
+      Invoice.delete_invoices(invoices, item)
+      item.destroy
+      render status: :no_content
+    elsif item.destroy
+      render status: :no_content
+    end
   end
 
   private

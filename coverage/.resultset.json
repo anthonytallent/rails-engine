@@ -547,25 +547,25 @@
           1,
           1,
           null,
-          0,
+          1,
           null,
-          0,
-          0,
-          0,
+          1,
+          1,
+          1,
           null,
-          0,
+          1,
           null,
-          0,
-          0,
+          1,
+          1,
           null,
-          0,
-          0,
+          1,
+          1,
           null,
-          0,
-          0,
+          1,
+          1,
           null,
-          0,
-          0,
+          1,
+          1,
           null,
           null
         ]
@@ -661,25 +661,25 @@
           1,
           1,
           null,
-          0,
+          1,
           null,
-          0,
-          0,
-          0,
+          1,
+          1,
+          1,
           null,
-          0,
+          1,
           null,
-          0,
-          0,
+          1,
+          1,
           null,
-          0,
-          0,
+          1,
+          1,
           null,
-          0,
-          0,
+          1,
+          1,
           null,
-          0,
-          0,
+          1,
+          1,
           null,
           null
         ]
@@ -796,6 +796,25 @@
           null
         ]
       },
+      "/Users/anthonytallent/3mod/projects/rails-engine/app/controllers/api/v1/items_merchants_controller.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "/Users/anthonytallent/3mod/projects/rails-engine/app/serializers/merchant_serializer.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null
+        ]
+      },
       "/Users/anthonytallent/3mod/projects/rails-engine/app/controllers/api/v1/merchants/items_controller.rb": {
         "lines": [
           1,
@@ -826,16 +845,8 @@
           null,
           null
         ]
-      },
-      "/Users/anthonytallent/3mod/projects/rails-engine/app/serializers/merchant_serializer.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          null
-        ]
       }
     },
-    "timestamp": 1675965889
+    "timestamp": 1675966827
   }
 }
