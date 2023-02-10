@@ -4,7 +4,7 @@ class InvoiceItem < ApplicationRecord
   has_many :merchants, through: :item
   has_many :discounts, through: :merchants
   
-  validates_presence_of :quantity, :unit_price, :status, :item_id, :invoice_id
+  # validates_presence_of :quantity, :unit_price, :status, :item_id, :invoice_id
 
-  enum status: { pending: 0, packaged: 1, shipped: 2 }
+  # enum status: { pending: 0, packaged: 1, shipped: 2 }
 end
