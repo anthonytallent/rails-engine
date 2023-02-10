@@ -3,7 +3,9 @@ class Api::V1::Items::SearchController < ApplicationController
     if params[:name] && (params[:max_price] || params[:min_price])
       render json: { data: { errors: 'Error: Item Not Found' } }, status: 400
     elsif params[:min_price].to_f < 0 || params[:max_price].to_f < 0
-      render json: { data: { errors: 'Error: Item Not Found' } }, status: 400
+      render json: { errors: 'Error: Item Not Found' }, status: 400
+    elsif params[:name] == ""
+      render json: { errors: 'Error: Item Not Found' }, status: 400
     elsif params[:name]
       items = Item.where("name ILIKE ?", "%#{params[:name]}%").sort
       render json: ItemSerializer.new(items)
@@ -16,6 +18,8 @@ class Api::V1::Items::SearchController < ApplicationController
     elsif params[:max_price]
       items = Item.where("unit_price <= ?", params[:max_price].to_f)
       render json: ItemSerializer.new(items)
+    else
+      render json: { errors: 'Error: Item Not Found' }, status: 400
     end
   end
 end

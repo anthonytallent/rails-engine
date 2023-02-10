@@ -246,7 +246,9 @@ RSpec.describe "items API" do
 
     describe "sad paths for search results based on queries" do
       it "cannot search based on name AND (min_price or max_price)" do
-        
+        get "/api/v1/items/find_all?name=san&min_price=19&max_price=70"
+
+        expect(response.status).to eq(400)
       end
     end
   end
