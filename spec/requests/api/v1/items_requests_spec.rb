@@ -4,11 +4,11 @@ RSpec.describe "items API" do
   describe "basic Restful CRUD paths" do
     let!(:merchant1) { create(:merchant) }
     let!(:merchant2) { create(:merchant) }
-    # let!(:customer1) { Customer.create(first_name: "Anthony", last_name: "Tony")}
+    let!(:customer1) { Customer.create(first_name: "Anthony", last_name: "Tony")}
     let!(:item1) { create(:item, merchant: merchant1) }
     let!(:item2) { create(:item, merchant: merchant1) }
-    # let!(:invoice1) { Invoice.create(customer_id: customer1.id, merchant_id: merchant1.id, status: 1)}
-    # let!(:ii1) { InvoiceItem.create(item_id: item1.id, invoice_id: invoice1.id)}
+    let!(:invoice1) { Invoice.create(customer_id: customer1.id, merchant_id: merchant1.id, status: 1)}
+    let!(:ii1) { InvoiceItem.create(item_id: item1.id, invoice_id: invoice1.id, unit_price: 400.00)}
     it "sends a list of all the items" do
       create_list(:item, 3, merchant: merchant1)
 
@@ -144,19 +144,27 @@ RSpec.describe "items API" do
     end
 
     it "can destroy an item and any invoice where that is the only item on it" do
-      id = create(:item).id
-      item = Item.last
-      invoice = Invoice.last
+      id = item1.id
 
-      expect(item.name).to be_a(String)
-      expect(item.description).to be_a(String)
-      expect(item.unit_price).to be_a(Float)
+      expect(item1.invoices.last).to eq(invoice1)
+
+      expect(item1.name).to be_a(String)
+      expect(item1.description).to be_a(String)
+      expect(item1.unit_price).to be_a(Float)
 
       delete "/api/v1/items/#{id}"
 
-      expect(item.name).to_not eq(Item.last.name)
-      expect(item.description).to_not eq(Item.last.description)
-      expect(item.unit_price).to_not eq(Item.last.unit_price)
+      expect { Invoice.find(id) }.to raise_error(ActiveRecord::RecordNotFound)
+    end
+
+    it "can destroy an item with no invoices" do
+      id = item2.id
+
+      expect(item2.invoices).to eq([])
+
+      delete "/api/v1/items/#{id}"
+
+      expect { Invoice.find(id) }.to raise_error(ActiveRecord::RecordNotFound)
     end
 
     it "can return it's merchants info" do
@@ -248,6 +256,25 @@ RSpec.describe "items API" do
       it "cannot search based on name AND (min_price or max_price)" do
         get "/api/v1/items/find_all?name=san&min_price=19&max_price=70"
 
+        expect(response.status).to eq(400)
+      end
+
+      it "cannot have a negative number for min/max price" do
+        neg_num = -19
+        get "/api/v1/items/find_all?min_price=#{neg_num}&max_price=70"
+
+        expect(response.status).to eq(400)
+      end
+
+      it "will not work if the name query param is empty" do
+        get "/api/v1/items/find_all?name="
+    
+        expect(response.status).to eq(400)
+      end
+
+      it "will not work if the name query param is empty" do
+        get "/api/v1/items/find_all"
+    
         expect(response.status).to eq(400)
       end
     end
