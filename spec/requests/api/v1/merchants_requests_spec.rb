@@ -59,7 +59,7 @@ RSpec.describe "Merchants API" do
   it "finds a merchant based on a name search (even a partial name searchs)" do
     merchant = Merchant.create(name: "Sandy B")
     get "/api/v1/merchants/find?name=san"
-# binding.pry
+
     merchant_hash = JSON.parse(response.body, symbolize_names: true)
     expect(merchant_hash).to have_key(:data)
     expect(merchant_hash[:data]).to be_a(Hash)
@@ -77,5 +77,23 @@ RSpec.describe "Merchants API" do
 
     expect(merchant_data[:attributes]).to have_key(:name)
     expect(merchant_data[:attributes][:name]).to be_a(String)
+  end
+
+  it "will not work without the query param name" do
+    get "/api/v1/merchants/find"
+
+    expect(response.status).to eq(400)
+  end
+
+  it "will not work if the name query param is empty" do
+    get "/api/v1/merchants/find?name="
+
+    expect(response.status).to eq(400)
+  end
+
+  it "will not return an error code if no name matches" do
+    get "/api/v1/merchants/find?name=zzzzzz"
+
+    expect(response.status).to eq(400)
   end
 end
