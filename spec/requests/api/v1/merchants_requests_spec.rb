@@ -55,4 +55,27 @@ RSpec.describe "Merchants API" do
     expect(merchant_data[:attributes]).to have_key(:name)
     expect(merchant_data[:attributes][:name]).to be_a(String)
   end
+
+  it "finds a merchant based on a name search (even a partial name searchs)" do
+    merchant = Merchant.create(name: "Sandy B")
+    get "/api/v1/merchants/find?name=san"
+# binding.pry
+    merchant_hash = JSON.parse(response.body, symbolize_names: true)
+    expect(merchant_hash).to have_key(:data)
+    expect(merchant_hash[:data]).to be_a(Hash)
+
+    merchant_data = merchant_hash[:data]
+
+    expect(merchant_data).to have_key(:id)
+    expect(merchant_data[:id]).to be_a(String)
+    
+    expect(merchant_data).to have_key(:type)
+    expect(merchant_data[:type]).to be_a(String)
+
+    expect(merchant_data).to have_key(:attributes)
+    expect(merchant_data[:attributes]).to be_a(Hash)
+
+    expect(merchant_data[:attributes]).to have_key(:name)
+    expect(merchant_data[:attributes][:name]).to be_a(String)
+  end
 end
